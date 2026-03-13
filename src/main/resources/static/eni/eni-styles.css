@@ -1,0 +1,55 @@
+.eni-movie-card {
+
+}
+
+.eni-movie-card-layer-01 {
+
+}
+
+.eni-movie-card-layer-01 > img {
+    height:100%;
+    object-fit:cover;
+}
+
+.eni-movie-card-layer-01 > .uk-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+}
+
+.eni-movie-card-layer-info{
+    background-color:#141414;
+    color:white;
+}
+
+.eni-movie-card-layer-info h1{
+    color:#dcdcdc;
+}
+
+.eni-movie-card-info-year {
+    color:#b3b3b3;
+}
+
+.eni-movie-card-info-synopsis {
+    color:#dcdcdc;
+}
+
+/*ERROR PART*/
+.eni-header-error{
+    color:#e50914;
+}
+
+.eni-error-card{
+    background-color:#141414;
+    border:1px solid #222;
+}
+
+.eni-error-card > .uk-icon{
+    color:#e50914;
+}
+
+.eni-error-card h3{
+    color:white;
+}
+
+.eni-error-card p{
+    color:#b3b3b3;
+}

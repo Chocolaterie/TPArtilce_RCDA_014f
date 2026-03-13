@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en"
+      layout:decorate="~{layout/base}"
+>
+<body>
+
+<title layout:fragment="title">Movie Form</title>
+
+<div layout:fragment="content">
+
+    <div class="uk-flex uk-flex-center">
+
+        <div class="uk-width-1-2 uk-padding-small">
+            <h1>Movie Form</h1>
+
+            <!-- login -->
+            <form class="uk-form-horizontal uk-margin-large" action="/movie-form-process" method="post"
+                  th:object="${movie}">
+
+                <input type="hidden" th:field="*{id}"/>
+
+                <!-- Title -->
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-horizontal-text">Title</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Title"
+                               th:field="*{title}"
+                               th:classappend="${#fields.hasErrors('title')} ? ' uk-form-danger' : ''">
+                        <ul th:if="${#fields.hasErrors('title')}" class="uk-form-danger">
+                            <li th:each="error: ${#fields.errors('title')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Genre -->
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-horizontal-year">Genre</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" id="genre" name="genre">
+                            <option th:each="genre : ${genres}"
+                                    th:value="${genre.id}"
+                                    th:selected="${movie.genre.id == genre.id}"
+                                    th:text="${genre.title}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Director -->
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-horizontal-year">Director</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" id="director" name="director">
+                            <option th:each="participant : ${participants}"
+                                    th:value="${participant.id}"
+                                    th:selected="${movie.director.id == participant.id}">
+                            [[${participant.getDisplayName() }]]
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Actors  -->
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-horizontal-year">Actors</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" id="actors" name="actors" multiple>
+                            <option th:each="participant : ${participants}" th:value="${participant.id}" th:selected="${movie.actorIsSelected(participant)}"
+                            >[[${participant.getDisplayName() }]]
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Year -->
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-horizontal-year">Year</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" id="form-horizontal-year" type="number" placeholder="Year"
+                               th:field="*{year}"
+                               th:classappend="${#fields.hasErrors('year')} ? ' uk-form-danger' : ''">
+                        <ul th:if="${#fields.hasErrors('year')}" class="uk-form-danger">
+                            <li th:each="error: ${#fields.errors('year')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Duration -->
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-horizontal-duration">Duration (minutes)</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" id="form-horizontal-duration" type="number" placeholder="Duration"
+                               th:field="*{duration}"
+                               th:classappend="${#fields.hasErrors('duration')} ? ' uk-form-danger' : ''">
+                        <ul th:if="${#fields.hasErrors('duration')}" class="uk-form-danger">
+                            <li th:each="error: ${#fields.errors('duration')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Synopsis -->
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-horizontal-synopsis">Synopsis</label>
+                    <div class="uk-form-controls">
+    <textarea class="uk-textarea" id="form-horizontal-synopsis" rows="5" placeholder="Synopsis"
+              th:field="*{synopsis}"
+              th:classappend="${#fields.hasErrors('synopsis')} ? ' uk-form-danger' : ''"></textarea>
+                        <ul th:if="${#fields.hasErrors('synopsis')}" class="uk-form-danger">
+                            <li th:each="error: ${#fields.errors('synopsis')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="uk-margin">
+                    <input type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
+                           value="Save"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

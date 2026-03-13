@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en"
+      layout:decorate="~{layout/base}"
+>
+<body>
+
+<title layout:fragment="title">[[#{Title_Details}]]</title>
+
+<div layout:fragment="content">
+    <h1>[[#{Title_Details}]]</h1>
+
+    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@m uk-margin-large eni-movie-card" uk-grid>
+
+        <!-- Image type affiche Netflix -->
+        <div class="uk-inline eni-movie-card-layer-01">
+            <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4"
+                 alt="Movie poster">
+
+            <!-- Overlay sombre -->
+            <div class="uk-overlay uk-overlay-primary uk-position-cover">
+            </div>
+        </div>
+
+        <!-- Infos du film -->
+        <div class="uk-flex uk-flex-middle eni-movie-card-layer-info">
+            <div class="uk-padding-large">
+
+                <!-- Titre -->
+                <h1 class="uk-heading-medium uk-margin-remove-bottom"
+                    th:text="${movie.title}"></h1>
+
+                <!-- Année + durée -->
+                <p class="uk-text-meta uk-margin-small-top eni-movie-card-info-year">
+                    <span th:text="${movie.year}"></span>
+                    •
+                    <span th:text="${movie.duration}"></span> min
+                </p>
+
+                <!-- Boutons style Netflix -->
+                <div class="uk-margin-medium">
+                    <button class="uk-button uk-button-primary uk-margin-small-right">
+                        <span uk-icon="play-circle"></span> [[#{Btn_Play}]]
+                    </button>
+                </div>
+
+                <!-- Synopsis -->
+                <div class="uk-margin-medium-top eni-movie-card-info-synopsis">
+                    <p th:text="${movie.synopsis}"></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--    Avis-->
+    <div>
+        <div>
+            <h3>Donner votre avis</h3>
+
+            <form class="uk-form-stacked uk-margin-medium"
+                  th:action="@{/send-movie-avis/{id}(id=${movie.id})}"
+                  method="post">
+
+                <input type="hidden" name="id" value="-1"/>
+
+                <!-- Note -->
+                <div class="uk-margin">
+                    <label class="uk-form-label">Note</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" id="note" name="note" required>
+                            <option value="">Choisir une note</option>
+                            <option value="1">1 / 5</option>
+                            <option value="2">2 / 5</option>
+                            <option value="3">3 / 5</option>
+                            <option value="4">4 / 5</option>
+                            <option value="5">5 / 5</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Commentaire -->
+                <div class="uk-margin">
+                    <label class="uk-form-label">Commentaire</label>
+                    <div class="uk-form-controls">
+                <textarea class="uk-textarea"
+                          id="comment"
+                          name="comment"
+                          rows="4"
+                          placeholder="Votre avis sur ce film..."
+                          required></textarea>
+                    </div>
+                </div>
+
+                <!-- Bouton -->
+
+                <!-- Submit -->
+                <div class="uk-margin">
+                    <input type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
+                           value="Send avis"/>
+
+            </form>
+        </div>
+
+        <h3>Avis</h3>
+        <div class="uk-padding-small" th:each="avis: ${movie.avis}">
+            <article class="uk-comment uk-comment-primary" role="comment">
+                <header class="uk-comment-header">
+                    <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                        <div class="uk-width-auto">
+                            <img class="uk-comment-avatar"
+                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdFe2l5yrU1Bd9lao2sMQTAFu0XVbDxk0GVQ&s"
+                                 width="80" height="80" alt="">
+                        </div>
+                        <div class="uk-width-expand">
+                            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">
+                                [[${avis.user.pseudo}]]
+                            </a></h4>
+                            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                <li><a href="#">[[${avis.note}]]/5</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+                <div class="uk-comment-body">
+                    <p>[[${avis.comment}]]</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

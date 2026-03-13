@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en"
+      layout:decorate="~{layout/base}">
+<body>
+
+<title layout:fragment="title">[[#{Title_Login}]]</title>
+
+<div layout:fragment="content">
+    <div class="uk-flex uk-flex-center uk-flex-middle">
+
+        <div class="uk-width-medium uk-padding-small">
+            <h1>[[#{Title_Login}]]</h1>
+
+            <!-- login -->
+            <form class="toggle-class" action="/login-process" method="post" th:object="${user}">
+                <fieldset class="uk-fieldset">
+                    <div class="uk-margin-small">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
+                            <input class="uk-input uk-border-pill"
+                                   th:placeholder="#{Placeholder_Username}"
+                                   th:field="*{email}"
+                                   type="text">
+                        </div>
+                    </div>
+                    <div class="uk-margin-small">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                            <input class="uk-input uk-border-pill"
+                                   th:placeholder="#{Placeholder_Password}"
+                                   th:field="*{password}"
+                                   type="password">
+                        </div>
+                    </div>
+                    <div class="uk-margin-small">
+                        <label>
+                            <input class="uk-checkbox" type="checkbox">
+                            [[#{Label_RememberMe}]]
+                        </label>
+                    </div>
+                    <div class="uk-margin-bottom">
+                        <button type="submit"
+                                class="uk-button uk-button-primary uk-border-pill uk-width-1-1">
+                            [[#{Btn_Login}]]
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- /login -->
+
+            <!-- recover password -->
+            <form class="toggle-class" action="login-dark.html" hidden>
+                <div class="uk-margin-small">
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: mail"></span>
+                        <input class="uk-input uk-border-pill"
+                               th:placeholder="#{Placeholder_Email}"
+                               required type="text">
+                    </div>
+                </div>
+                <div class="uk-margin-bottom">
+                    <button type="submit"
+                            class="uk-button uk-button-primary uk-border-pill uk-width-1-1">
+                        [[#{Btn_SendPassword}]]
+                    </button>
+                </div>
+            </form>
+            <!-- /recover password -->
+
+            <!-- action buttons -->
+            <div>
+                <div class="uk-text-center">
+                    <a class="uk-link-reset uk-text-small toggle-class"
+                       data-uk-toggle="target: .toggle-class ;animation: uk-animation-fade">
+                        [[#{Link_ForgotPassword}]]
+                    </a>
+                    <a class="uk-link-reset uk-text-small toggle-class"
+                       data-uk-toggle="target: .toggle-class ;animation: uk-animation-fade"
+                       hidden>
+                        <span data-uk-icon="arrow-left"></span>
+                        [[#{Link_BackToLogin}]]
+                    </a>
+                </div>
+            </div>
+            <!-- action buttons -->
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en"
+      layout:decorate="~{layout/base}"
+>
+
+<body>
+
+<title layout:fragment="title">[[#{Title_Movie_NotFound}]]</title>
+
+<div layout:fragment="content">
+    <h1 class="uk-heading-medium uk-text-center eni-header-error">
+        [[#{Title_Movie_NotFound}]]
+    </h1>
+
+    <div class="uk-card uk-card-body uk-margin-large-top uk-text-center eni-error-card">
+
+        <span uk-icon="icon: warning; ratio: 3"></span>
+
+        <h3 class="uk-margin-medium-top">
+            [[#{Title_Movie_NotFound_Desc}]]
+        </h3>
+
+        <p>
+            [[#{Title_Movie_NotFound_Desc2}]]
+        </p>
+
+        <div class="uk-margin-medium-top">
+            <a href="/static" class="uk-button uk-button-primary">
+                [[#{Btn_BackToHome}]]
+            </a>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
